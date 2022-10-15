@@ -144,11 +144,22 @@ class _LoginState extends State<Login> {
                           Center(
                             child: TextButton(
                               onPressed: () async {
-                              var information = FirebaseAuth.instance;
+                                try {
+                                  var information = FirebaseAuth.instance;
                               
                           UserCredential Users = await information.createUserWithEmailAndPassword(
                                 email: email.text.trim(),
                                 password: password.text.trim() );
+                              
+                                  
+                                } catch (e) {
+                                  showDialog(context: context,
+                                   builder: (context) {
+                                     return AlertDialog(content: Text("sorry what are you dping"),);
+                                   },
+                                   );
+                                  
+                                }
                               
                             }, child: Text("sign in")),
                           ),
